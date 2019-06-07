@@ -33,23 +33,28 @@ If an ouput directory is not specified, the files will be downloaded into a dire
 
 ### q2-upload.sh  
 
-Import sequence reads as q2 artefact file and demultiplex when needed.   
+Import sequence reads as [QIIME2](https://docs.qiime2.org/2019.4/) artefact file and demultiplex when needed.  
+Citation: _Boylen E, et al. QIIME 2: Reproducible, interactive, scalable, and extensible microbiome data science. PeerJ Preprints 6:e27295v2 https://doi.org/10.7287/peerj.preprints.27295v2_ 
   
 **Requirements:**  
 1. If fastqs are compressed it must be .gz  
 `for f in *.bz2; do bzcat "$f" | gzip -c >"${f%.*}.gz"; done`  
+
 2. If uploading raw reads with barcodes for demultiplexing:  
 The raw sequence reads need to be in their own folder *reads*; and named *forward.fastq.gz, reverse.fastq.gz, barcodes.fastq.gz*  
 These are the only files in that folder.  
 A *sample-metadata.tsv* file is required, containing at least *SampleID* and *BarcodeSequence* columns.  
-If `-r|--reads` is not supplied and demultiplexing is required, then the `pwd` must contain a folder called `reads`.
+If `-r|--reads` is not supplied and demultiplexing is required, then the `pwd` must contain a folder called `reads`.  
+
 3. If uploading raw, demultiplexed reads.  
 A *manifest.tsv* file is required with the following information:  
 ```
 sample-id       forward-absolute-filepath       reverse-absolute-filepath
 sample-1        filepathforward-read.fastq.gz   filepath/reverse-read.fastq.gz
 ```
+
 4. $DIR = folder where output will be created. Must contain the relevant metadata file.  
+
 
 ```
 VERSION=0.1.0
